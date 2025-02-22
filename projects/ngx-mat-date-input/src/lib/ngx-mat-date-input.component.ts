@@ -35,6 +35,7 @@ import {
 } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { Subject, takeUntil } from 'rxjs'
+import { NgxMatDateInputControls } from './ngx-mat-date-input.interface'
 
 class ngxMatDateInputBase {
   constructor(
@@ -77,7 +78,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
   id = `ngxMatDateInput-${NgxMatDateInputComponent.nextId++}`
 
   itemForm = this._createItemForm()
-  controls = {
+  controls: NgxMatDateInputControls = {
     day: this.itemForm.get('day')!,
     month: this.itemForm.get('month')!,
     year: this.itemForm.get('year')!,

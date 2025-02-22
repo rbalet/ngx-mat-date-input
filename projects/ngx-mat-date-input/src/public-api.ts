@@ -3,3 +3,4 @@
  */
 
 export * from './lib/ngx-mat-date-input.component'
+export * from './lib/ngx-mat-date-input.interface'
