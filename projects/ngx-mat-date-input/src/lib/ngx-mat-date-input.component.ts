@@ -241,10 +241,9 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
       .get('datePicker')
       ?.valueChanges.pipe(takeUntil(this._unsubscribe$))
       .subscribe((value) => {
-        // @ToDo: Wont work with multiple datePicker - component instantiation
         this.controls.day?.patchValue(value.getDate().toString(), { emitEvent: false })
         this.controls.month?.patchValue((value.getMonth() + 1).toString(), { emitEvent: false })
-        this.controls.year?.patchValue(value.getFullYear().toString(), { emitEvent: false })
+        this.controls.year?.patchValue(value.getFullYear().toString(), { emitEvent: true })
       })
 
     this.itemForm
