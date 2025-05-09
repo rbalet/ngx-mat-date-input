@@ -1,6 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y'
 import { coerceBooleanProperty } from '@angular/cdk/coercion'
-import { NgIf } from '@angular/common'
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -59,7 +58,6 @@ class ngxMatDateInputBase {
     },
   ],
   imports: [
-    NgIf,
     // Forms
     FormsModule,
     ReactiveFormsModule,
