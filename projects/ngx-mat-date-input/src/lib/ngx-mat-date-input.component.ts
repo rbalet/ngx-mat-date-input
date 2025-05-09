@@ -71,8 +71,8 @@ class ngxMatDateInputBase {
 export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnDestroy, DoCheck {
   static nextId = 0
 
-  @ViewChild('monthInput', { static: true }) monthInput!: ElementRef
-  @ViewChild('yearInput', { static: true }) yearInput!: ElementRef
+  @ViewChild('monthInput', { static: false }) monthInput!: ElementRef
+  @ViewChild('yearInput', { static: false }) yearInput!: ElementRef
 
   @HostBinding()
   id = `ngxMatDateInput-${NgxMatDateInputComponent.nextId++}`
@@ -224,7 +224,13 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
         value?.year?.length &&
         value.year.length >= 4
       ) {
-        const newDate = new Date(+value.year, +value.month, +value.day, value.hour, value.minute)
+        const newDate = new Date(
+          +value.year,
+          +value.month - 1, // Months is 0-based index
+          +value.day,
+          value.hour,
+          value.minute,
+        )
         this.itemForm.patchValue(
           {
             datePicker: newDate,
@@ -276,14 +282,19 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
           return
         }
         if (!this._controlValue(value, 'month')) return
+        if (value.length > 2) {
+          value = value[0] + value[2]
+          this.controls.month?.setValue(value)
+        }
 
         if (+value > 12) this.controls.month?.setValue('12')
         else if (typeof value === 'number' && value < 0) this.controls.month?.setValue('01')
-
-        if ((+value >= 2 && +value <= 12) || value.length >= 2) {
+        else if (+value >= 2 && +value <= 12) {
           if (+value < 10 && !value.toString().includes('0'))
             this.controls.month?.setValue(`0${value}`)
+        }
 
+        if (this.controls.month?.value?.length === 2) {
           this.yearInput?.nativeElement.focus()
         }
 
@@ -401,13 +412,20 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
     let year = ''
 
     if (date) {
-      const tempBDay = new Date(date)
-      minute = tempBDay.getMinutes()
-      hour = tempBDay.getHours()
-      day = tempBDay.getDate().toString()
-      month = (tempBDay.getMonth() + 1).toString()
-      year = tempBDay.getFullYear().toString()
+      const tempDay = new Date(date)
+      minute = tempDay.getMinutes()
+      hour = tempDay.getHours()
+      day = tempDay.getDate().toString()
+      month = (tempDay.getMonth() + 1).toString()
+      year = tempDay.getFullYear().toString()
     }
+
+    if (this._formerValues.day === '')
+      this._formerValues = {
+        day: day ? day.padStart(2, '0') : '',
+        month: month ? month.padStart(2, '0') : '',
+        year: year,
+      }
 
     this.itemForm.patchValue(
       {
@@ -436,7 +454,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
     this.stateChanges.next(undefined)
   }
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     this._updateItemForm(value)
 
     // Value is set from outside using setValue()

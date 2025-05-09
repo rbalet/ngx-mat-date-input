@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-date-input",
-  "version": "19.5.0",
+  "version": "19.6.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,12 +15,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.1",
-    "@angular/cdk": "^19.2.2",
+    "@angular/cdk": "^19.2.15",
     "@angular/common": "^19.2.1",
     "@angular/compiler": "^19.2.1",
     "@angular/core": "^19.2.1",
     "@angular/forms": "^19.2.1",
-    "@angular/material": "^19.2.2",
+    "@angular/material": "^19.2.15",
     "@angular/platform-browser": "^19.2.1",
     "@angular/platform-browser-dynamic": "^19.2.1",
     "@angular/router": "^19.2.1",
@@ -32,19 +32,19 @@
     "@angular-devkit/build-angular": "^19.2.1",
     "@angular/cli": "^19.2.1",
     "@angular/compiler-cli": "^19.2.1",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@semantic-release/apm-config": "^9.0.1",
-    "@types/jasmine": "~5.1.7",
+    "@types/jasmine": "~5.1.8",
     "husky": "^9.1.7",
-    "jasmine-core": "~5.6.0",
+    "jasmine-core": "~5.7.1",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "ng-packagr": "^19.2.0",
-    "typescript": "~5.7.3"
+    "ng-packagr": "^19.2.2",
+    "typescript": "~5.8.3"
   },
   "release": {
     "extends": "@semantic-release/apm-config"
