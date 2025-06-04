@@ -27,11 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/ngx-mat-date-input/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "tsConfig": "projects/ngx-mat-date-input/tsconfig.spec.json"
           }
         }
       }
@@ -51,9 +47,6 @@
               "base": "dist/ngx-mat-date-input-tester"
             },
             "index": "projects/ngx-mat-date-input-tester/src/index.html",
-            "polyfills": [
-              "projects/ngx-mat-date-input-tester/src/polyfills.ts"
-            ],
             "tsConfig": "projects/ngx-mat-date-input-tester/tsconfig.app.json",
             "assets": [
               "projects/ngx-mat-date-input-tester/src/favicon.ico",
@@ -142,6 +135,32 @@
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }
