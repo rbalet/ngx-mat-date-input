@@ -87,9 +87,10 @@ imports: [NgxMatDateInputComponent];
 | fields          | `{day: boolean, month: boolean, year: boolean}` | `{day: true, month: true, year: true}` | Show specifies fields                  |
 
 ## Css variable
-| Name                       | Default | Explanation                       |
-| -------------------------- | ------- | --------------------------------- |
-| `--ngx-mat-date-input-gap` | `16px`  | Change the gap between the inputs |
+| Name                           | Default | Explanation                       |
+| ------------------------------ | ------- | --------------------------------- |
+| `--ngx-mat-date-input-gap`     | `16px`  | Change the gap between the inputs |
+| `--ngx-mat-date-input-padding` | `0`     | Padding around the form           |
 
 ## Auto formatting
 ### Month

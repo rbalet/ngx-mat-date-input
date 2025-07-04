@@ -6,5 +6,6 @@
   .ngxMatDateInput-form {
     display: flex;
     gap: var(--ngx-mat-date-input-gap, 16px);
+    padding: var(--ngx-mat-date-input-padding, 0);
   }
 }
