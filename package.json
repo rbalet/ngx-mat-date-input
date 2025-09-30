@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-date-input",
-  "version": "20.1.1",
+  "version": "20.1.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -31,8 +31,8 @@
     "@angular-devkit/build-angular": "*",
     "@angular/cli": "*",
     "@angular/compiler-cli": "*",
-    "@commitlint/cli": "19.8.1",
-    "@commitlint/config-conventional": "19.8.1",
+    "@commitlint/cli": "20.1.0",
+    "@commitlint/config-conventional": "20.0.0",
     "@semantic-release/apm-config": "9.0.1",
     "@types/jasmine": "5.1.8",
     "husky": "9.1.7",
@@ -42,7 +42,7 @@
     "karma-coverage": "2.2.1",
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
-    "ng-packagr": "20.0.1",
+    "ng-packagr": "20.3.0",
     "typescript": "5.8.3"
   },
   "release": {

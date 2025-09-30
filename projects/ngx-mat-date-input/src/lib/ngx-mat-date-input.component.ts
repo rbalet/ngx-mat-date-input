@@ -13,6 +13,7 @@ import {
   Self,
   ViewChild,
   booleanAttribute,
+  inject,
 } from '@angular/core'
 import {
   FormBuilder,
@@ -67,6 +68,11 @@ class ngxMatDateInputBase {
   ],
 })
 export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnDestroy, DoCheck {
+  #changeDetectorRef = inject(ChangeDetectorRef)
+  #fm = inject(FocusMonitor)
+  #elRef = inject(ElementRef)
+  #formBuilder = inject(FormBuilder)
+
   static nextId = 0
 
   @ViewChild('monthInput', { static: false }) monthInput!: ElementRef
@@ -167,10 +173,6 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
   private _isEmpty = true
 
   constructor(
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _fm: FocusMonitor,
-    private _elRef: ElementRef<HTMLElement>,
-    private _formBuilder: FormBuilder,
     @Optional() @Self() _ngControl: NgControl,
     @Optional() _parentForm: NgForm,
     @Optional() _parentFormGroup: FormGroupDirective,
@@ -197,13 +199,13 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
       )
       if (currentState !== this.errorState) {
         this.errorState = currentState
-        this._changeDetectorRef.markForCheck()
+        this.#changeDetectorRef.markForCheck()
       }
     }
   }
 
   private _subscribe() {
-    this._fm.monitor(this._elRef, true).subscribe((origin) => {
+    this.#fm.monitor(this.#elRef, true).subscribe((origin) => {
       if (this.focused && !origin) {
         this.onTouched()
       }
@@ -237,7 +239,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
         )
 
         this.propagateChange(newDate.toISOString())
-        this._changeDetectorRef.markForCheck()
+        this.#changeDetectorRef.markForCheck()
       }
     })
 
@@ -248,6 +250,8 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
         this.controls.day?.patchValue(value.getDate().toString(), { emitEvent: false })
         this.controls.month?.patchValue((value.getMonth() + 1).toString(), { emitEvent: false })
         this.controls.year?.patchValue(value.getFullYear().toString(), { emitEvent: true })
+
+        this.writeValue(value.toISOString())
       })
 
     this.itemForm
@@ -392,7 +396,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
     year: FormControl<string>
     datePicker: FormControl<Date>
   }> {
-    return this._formBuilder.group({
+    return this.#formBuilder.group({
       minute: new FormControl(0, { nonNullable: true }),
       hour: new FormControl(0, { nonNullable: true }),
       day: new FormControl('', { nonNullable: true }),
@@ -448,7 +452,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled
-    this._changeDetectorRef.markForCheck()
+    this.#changeDetectorRef.markForCheck()
     this.stateChanges.next(undefined)
   }
 
@@ -456,7 +460,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
     this._updateItemForm(value)
 
     // Value is set from outside using setValue()
-    this._changeDetectorRef.markForCheck()
+    this.#changeDetectorRef.markForCheck()
     this.stateChanges.next(undefined)
   }
   get empty(): boolean {
@@ -470,7 +474,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
   onContainerClick(event: MouseEvent): void {
     if ((event.target as Element).tagName.toLowerCase() !== 'input') {
       // tslint:disable-next-line:no-non-null-assertion
-      this._elRef.nativeElement.querySelector('input')!.focus()
+      this.#elRef.nativeElement.querySelector('input')!.focus()
     }
   }
 
@@ -478,13 +482,13 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
     this.itemForm.reset()
     this.propagateChange(null)
 
-    this._changeDetectorRef.markForCheck()
+    this.#changeDetectorRef.markForCheck()
     this.stateChanges.next(undefined)
   }
 
   ngOnDestroy() {
     this.stateChanges.complete()
-    this._fm.stopMonitoring(this._elRef)
+    this.#fm.stopMonitoring(this.#elRef)
 
     this._unsubscribe$.next()
     this._unsubscribe$.complete()
