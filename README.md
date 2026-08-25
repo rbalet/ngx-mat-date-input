@@ -19,8 +19,8 @@ An Angular Material library for entering a date.
 | ![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-date-input/main/assets/example.png) | ![Input example](https://raw.githubusercontent.com/rbalet/ngx-mat-date-input/main/assets/example-2.png) |
 
 **Supports:**
-- Angular >=15
-- Angular Material >=15
+- Angular 22
+- Angular Material 22
 
 ## Demo
 - https://stackblitz.com/~/github.com/rbalet/ngx-mat-date-input
@@ -81,6 +81,7 @@ imports: [NgxMatDateInputComponent];
 | autocomplete    | `"on" or "off"`                                 | `"on"`                                 | Use the default browser autofill       |
 | labels          | `string[]`                                      | `["DD", "MM", "YYYY"]`                 | Label used by the mat-input            |
 | placeholders    | `string[]`                                      | `["", "", ""]`                         | with an *s*                            |
+| appearance      | `"fill" or "outline"`                         | Angular Material default               | Appearance of the date fields          |
 | required        | `boolean`                                       | `undefined`                            |                                        |
 | disabled        | `boolean`                                       | `undefined`                            |                                        |
 | min             | `date`                                          | `undefined`                            | Activate min validators on each fields |

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field'
@@ -9,6 +9,7 @@ import { NgxMatDateInputComponent } from '../../../ngx-mat-date-input/src/lib/ng
   selector: 'app-root',
   styleUrl: './app.component.css',
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     // Forms
     FormsModule,
