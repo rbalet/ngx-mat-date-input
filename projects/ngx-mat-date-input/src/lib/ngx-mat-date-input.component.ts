@@ -29,6 +29,7 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core'
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker'
 import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatFormFieldAppearance,
   MatFormFieldControl,
   MatFormFieldModule,
@@ -72,6 +73,7 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
   #fm = inject(FocusMonitor)
   #elRef = inject(ElementRef)
   #formBuilder = inject(FormBuilder)
+  #formFieldDefaultOptions = inject(MAT_FORM_FIELD_DEFAULT_OPTIONS, { optional: true })
 
   static nextId = 0
 
@@ -95,7 +97,8 @@ export class NgxMatDateInputComponent extends ngxMatDateInputBase implements OnD
   @Input() labels: [string, string, string] = ['DD', 'MM', 'YYYY']
   @Input() placeholders: [string, string, string] = ['', '', '']
   @Input() name?: string
-  @Input() appearance: MatFormFieldAppearance = 'fill'
+  @Input() appearance: MatFormFieldAppearance =
+    this.#formFieldDefaultOptions?.appearance ?? 'fill'
   @Input() matDatepicker?: MatDatepicker<any>
   @Input() yearMethod: (value: string, controls: any) => void = this._yearMethod
 
